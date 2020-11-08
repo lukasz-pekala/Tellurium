@@ -20,8 +20,8 @@ jobs:
     - name: Change directory to Src
       run: cd Src
     - name: Install dependencies
-      run: dotnet restore Tellurium.sln
+      run: dotnet restore
     - name: Build
-      run: dotnet build Tellurium.sln --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
