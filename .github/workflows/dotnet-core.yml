@@ -10,6 +10,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./Src
 
     steps:
     - uses: actions/checkout@v2
@@ -18,11 +22,8 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      working-directory: ./Src
       run: dotnet restore
     - name: Build
-      working-directory: ./Src
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      working-directory: ./Src
       run: dotnet test --no-restore --verbosity normal
