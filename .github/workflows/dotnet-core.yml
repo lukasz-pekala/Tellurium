@@ -17,10 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    - name: run ls
-      run: ls
-    - name: Change directory to src
-      run: cd src
+    - name: Change directory to Src
+      run: cd Src
     - name: Install dependencies
       run: dotnet restore Tellurium.sln
     - name: Build
