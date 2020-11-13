@@ -73,8 +73,12 @@ namespace Tellurium.VisualAssertion.Dashboard
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddFile("Logs/myapp-{Date}.txt");
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            LoggerFactory.Create(builder => 
+            {
+                builder.AddConfiguration(Configuration.GetSection("Logging"));
+                builder.AddConsole();
+                builder.AddDebug();
+            });
 
             if (env.IsDevelopment())
             {
