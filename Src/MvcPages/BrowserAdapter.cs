@@ -620,5 +620,11 @@ namespace Tellurium.MvcPages
         /// </summary>
         /// <param name="id">Value of id attribute</param>
         WebTable GetTableWithId(string id);
+
+        /// <summary>
+        /// Asserts current view with pattern
+        /// </summary>
+        /// <param name="patternName">Pattern name</param>
+        void AssertView(string patternName);
     }
 }
