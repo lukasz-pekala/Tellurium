@@ -42,14 +42,16 @@ namespace Tellurium.Sample.UITests
                 }
             };
 
-            //Initialize VisualAssertions
-            AssertView.Init(new VisualAssertionsConfig
+            var visualAssertionConfig = new VisualAssertionsConfig
             {
                 BrowserName = driverType.ToString(),
                 ProjectName = "Sample Project",
                 ScreenshotCategory = "Sample Form",
-                ProcessScreenshotsAsynchronously = true
-            });
+                ProcessScreenshotsAsynchronously = true,
+            };
+
+            //Initialize VisualAssertions
+            browserAdapterConfig.VisualAssertion = new TelluriumVisualAssertion(visualAssertionConfig);
 
 
             //Prepare infrastructure for test
@@ -57,13 +59,13 @@ namespace Tellurium.Sample.UITests
             {
                 //Test
                 browserAdapter.NavigateTo<TestFormsController>(c => c.Index());
-                AssertView.EqualsToPattern(browserAdapter, "Sample11");
+                browserAdapter.AssertView("Sample11");
                 
                 var detinationForm = browserAdapter.GetForm<SampleFormViewModel>(FormsIds.TestFormDst);
                 var sourcenForm = browserAdapter.GetForm<SampleFormViewModel>(FormsIds.TestFormSrc);
 
-                AssertView.EqualsToPattern(detinationForm, "Destination form");
-                AssertView.EqualsToPattern(sourcenForm, "Source form");
+                browserAdapter.AssertView("Destination form");
+                browserAdapter.AssertView("Source form");
 
                 var textInputValue = sourcenForm.GetFieldValue(x=>x.TextInput);
                 detinationForm.SetFieldValue(x => x.TextInput, textInputValue);
@@ -84,7 +86,7 @@ namespace Tellurium.Sample.UITests
                 var multiselectListValue = sourcenForm.GetFieldValue(x=>x.MultiSelectListValue);
                 detinationForm.SetFieldValue(x=>x.MultiSelectListValue, multiselectListValue);
 
-                AssertView.EqualsToPattern(browserAdapter, "Sample12");
+                browserAdapter.AssertView("Sample12");
                 
                 detinationForm.SetFieldValue("SingleFile", "SampleFileToUpload.docx");
             }
@@ -102,17 +104,16 @@ namespace Tellurium.Sample.UITests
 
             };
 
-
-
             //Initialize VisualAssertions
-            AssertView.Init(new VisualAssertionsConfig
+            var visualAssertionConfig = new VisualAssertionsConfig
             {
                 BrowserName = browserAdapterConfig.BrowserType.ToString(),
                 ProjectName = "Sample Project",
                 ScreenshotCategory = "Sample Form",
-                TestOutputWriter = TestContext.Progress.WriteLine,
                 ProcessScreenshotsAsynchronously = true
-            });
+            };
+
+            browserAdapterConfig.VisualAssertion = new TelluriumVisualAssertion(visualAssertionConfig);
 
 
             //Prepare infrastructure for test
@@ -120,7 +121,7 @@ namespace Tellurium.Sample.UITests
             {
                 //Test
                 browserAdapter.NavigateTo("TestForms/Index/");
-                AssertView.EqualsToPattern(browserAdapter, "SampleFullPage");
+                browserAdapter.AssertView("SampleFullPage");
             }
         }
 
@@ -131,14 +132,15 @@ namespace Tellurium.Sample.UITests
             var browserAdapterConfig = BrowserAdapterConfig.FromAppConfig(TestContext.CurrentContext.TestDirectory);
 
             //Initialize VisualAssertions
-            AssertView.Init(new VisualAssertionsConfig
+            var visualAssertionConfig = new VisualAssertionsConfig
             {
                 BrowserName = browserAdapterConfig.BrowserType.ToString(),
                 ProjectName = "Sample Project",
                 ScreenshotCategory = "Sample Form",
-                TestOutputWriter = TestContext.Progress.WriteLine,
                 ProcessScreenshotsAsynchronously = true
-            });
+            };
+
+            browserAdapterConfig.VisualAssertion = new TelluriumVisualAssertion(visualAssertionConfig);
 
 
             //Prepare infrastructure for test
@@ -146,7 +148,7 @@ namespace Tellurium.Sample.UITests
             {
                 //Test
                 browserAdapter.NavigateTo("TestForms/Index/");
-                AssertView.EqualsToPattern(browserAdapter, "Sample21");
+                browserAdapter.AssertView("Sample21");
                 
                 var detinationForm = browserAdapter.GetForm(FormsIds.TestFormDst);
                 var sourcenForm = browserAdapter.GetForm(FormsIds.TestFormSrc);
@@ -170,7 +172,7 @@ namespace Tellurium.Sample.UITests
                 var multiselectListValue = sourcenForm.GetFieldValue("MultiSelectListValue");
                 detinationForm.SetFieldValue("MultiSelectListValue", multiselectListValue);
 
-                AssertView.EqualsToPattern(browserAdapter, "Sample22");
+                browserAdapter.AssertView("Sample22");
             }
         }
 
@@ -181,14 +183,15 @@ namespace Tellurium.Sample.UITests
             var browserAdapterConfig = BrowserAdapterConfig.FromAppConfig(TestContext.CurrentContext.TestDirectory);
 
             //Initialize VisualAssertions
-            AssertView.Init(new VisualAssertionsConfig
+            var visualAssertionConfig = new VisualAssertionsConfig
             {
                 BrowserName = browserAdapterConfig.BrowserType.ToString(),
                 ProjectName = "Sample Project",
                 ScreenshotCategory = "Sample Form",
-                TestOutputWriter = TestContext.Progress.WriteLine,
                 ProcessScreenshotsAsynchronously = true
-            });
+            };
+
+            browserAdapterConfig.VisualAssertion = new TelluriumVisualAssertion(visualAssertionConfig);
 
 
             //Prepare infrastructure for test
@@ -196,7 +199,7 @@ namespace Tellurium.Sample.UITests
             {
                 //Test
                 browserAdapter.NavigateTo("TestForms/Index/");
-                AssertView.EqualsToPattern(browserAdapter, "Sample31");
+                browserAdapter.AssertView("Sample31");
                 
                 var detinationForm = browserAdapter.GetForm(FormsIds.TestFormDst);
                 var sourcenForm = browserAdapter.GetForm(FormsIds.TestFormSrc);
@@ -220,7 +223,7 @@ namespace Tellurium.Sample.UITests
                 var multiselectListValue = sourcenForm.GetFieldValueByLabel("MultiSelect input");
                 detinationForm.SetFieldValueByLabel("MultiSelect input", multiselectListValue);
 
-                AssertView.EqualsToPattern(browserAdapter, "Sample33");
+                browserAdapter.AssertView("Sample33");
             }
         }
 

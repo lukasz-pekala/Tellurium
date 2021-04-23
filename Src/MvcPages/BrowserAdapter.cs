@@ -22,11 +22,17 @@ using Tellurium.MvcPages.WebPages.WebForms;
 
 namespace Tellurium.MvcPages
 {
+    public interface IVisualAssertion
+    {
+        void AssertView(IBrowserCamera camera, string pattern);
+    }
+
     public class BrowserAdapter : IBrowserAdapter
     {
         private RemoteWebDriver Driver { get; set; }
         private IBrowserCamera browserCamera;
         private IBrowserCamera errorBrowserCamera;
+        private IVisualAssertion assertionService;
 
         private INavigator navigator;
         private List<IFormInputAdapter> supportedInputsAdapters;
@@ -70,6 +76,7 @@ namespace Tellurium.MvcPages
             browserAdapter.endpointCoverageReportBuilder = EndpointCoverageReportBuilderFactory.Create(config, navigator);
             browserAdapter.errorScreenshotStorage = ScreenshotStorageFactory.CreateForErrorScreenshot(config);
             browserAdapter.pageReloadDetector = config.PageReloadDetector ?? new DefaultPageReloadDetector();
+            browserAdapter.assertionService = config.VisualAssertion;
             if (config.AnimationsDisabled)
             {
                 browserAdapter.navigator.PageReload += (sender, args) => browserAdapter.Driver.DisableAnimations();
@@ -114,6 +121,11 @@ namespace Tellurium.MvcPages
                     Height = dimensionsConfig.Height
                 };
             }
+        }
+
+        public void AssertView(string patternName)
+        {
+            assertionService.AssertView(this, patternName);
         }
 
         public void NavigateTo<TController>(Expression<Action<TController>> action)

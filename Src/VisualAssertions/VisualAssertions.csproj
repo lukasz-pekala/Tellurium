@@ -115,6 +115,7 @@
     <Compile Include="Infrastructure\Persistence\PersistanceEngine.cs" />
     <Compile Include="Infrastructure\Persistence\Repository.cs" />
     <Compile Include="Infrastructure\SessionContext.cs" />
+    <Compile Include="Screenshots\PixelByPixelComparisonParameters.cs" />
     <Compile Include="Screenshots\Service\ComparisonStrategies\HashComparisonStrategy.cs" />
     <Compile Include="Screenshots\Service\ComparisonStrategies\IScreenshotComparisonStrategy.cs" />
     <Compile Include="Screenshots\Service\ComparisonStrategies\PixelByPixelComparisonStrategy.cs" />
@@ -152,7 +153,7 @@
     <Compile Include="Screenshots\Queries\FindProjectByName.cs" />
     <Compile Include="Screenshots\Queries\FindTestCaseForBrowser.cs" />
     <Compile Include="Screenshots\Service\VisualAssertionsService.cs" />
-    <Compile Include="Screenshots\AssertView.cs" />
+    <Compile Include="Screenshots\VisualAssertion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcPages\MvcPages.csproj">

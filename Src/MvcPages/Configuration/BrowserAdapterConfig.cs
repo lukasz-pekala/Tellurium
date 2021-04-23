@@ -52,6 +52,8 @@ namespace Tellurium.MvcPages.Configuration
 
         public IPageReloadDetector PageReloadDetector { get; set; }
 
+        public IVisualAssertion VisualAssertion { get; set; }
+
         internal string DownloadDirPath { get; set; }
 
         public BrowserAdapterConfig()
